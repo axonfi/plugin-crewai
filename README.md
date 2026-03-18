@@ -4,6 +4,21 @@ CrewAI toolkit for [Axon](https://axonfi.xyz) — treasury and payment infrastru
 
 Gives your CrewAI agents the ability to send payments, swap tokens, interact with DeFi protocols, and check vault balances — all through non-custodial Axon vaults with gasless EIP-712 signing.
 
+## Prerequisites
+
+Before using this plugin, you need an Axon vault:
+
+1. **Go to [app.axonfi.xyz](https://app.axonfi.xyz)** and connect your wallet
+2. **Deploy a vault** - this is your non-custodial treasury. Only you (the owner) can withdraw.
+3. **Register a bot key** - generate a new key pair in the dashboard or bring your own. This is the key your CrewAI agent will sign with. Set a `maxPerTxAmount` to cap what the bot can spend per transaction.
+4. **Fund the vault** - deposit USDC (or any ERC-20) into your vault address.
+5. **Copy your credentials**:
+   - `vault_address` - your deployed vault address
+   - `bot_private_key` - the bot's private key (the one registered in step 3)
+   - `chain_id` - 8453 (Base), 42161 (Arbitrum), or 84532 (Base Sepolia for testing)
+
+Your bot signs payment intents. It never holds funds, never pays gas, and can only spend within the limits you set. If the bot key is compromised, the attacker is capped by `maxPerTxAmount` and can only send to whitelisted destinations.
+
 ## Installation
 
 ```bash
