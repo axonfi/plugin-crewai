@@ -15,7 +15,7 @@ Before using this plugin, you need an Axon vault:
 5. **Copy your credentials**:
    - `vault_address` - your deployed vault address
    - `bot_private_key` - the bot's private key (the one registered in step 3)
-   - `chain_id` - 8453 (Base), 42161 (Arbitrum), or 84532 (Base Sepolia for testing)
+   - `chain_id` - `Chain.Base` (8453), `Chain.Arbitrum` (42161), or `Chain.BaseSepolia` (84532) for testing — `from axonfi import Chain`
 
 Your bot signs payment intents. It never holds funds, never pays gas, and can only spend within the limits you set. If the bot key is compromised, the attacker is capped by `maxPerTxAmount` and can only send to whitelisted destinations.
 
@@ -30,11 +30,12 @@ pip install crewai-axon
 ```python
 from crewai import Agent, Task, Crew
 from crewai_axon import AxonToolkit
+from axonfi import Chain
 
 # Initialize the toolkit
 toolkit = AxonToolkit(
     vault_address="0x05c6ab8c7b0b1bb42980d9b6a4cb666f0af424c7",
-    chain_id=84532,           # Base Sepolia
+    chain_id=Chain.BaseSepolia,
     bot_private_key="0x...",
 )
 
@@ -74,9 +75,11 @@ All amounts are **human-readable** (e.g. `5.00` for 5 USDC, not `5000000`).
 ### Raw Private Key
 
 ```python
+from axonfi import Chain
+
 toolkit = AxonToolkit(
     vault_address="0x...",
-    chain_id=84532,
+    chain_id=Chain.BaseSepolia,
     bot_private_key="0x...",
 )
 ```
@@ -84,9 +87,11 @@ toolkit = AxonToolkit(
 ### Keystore File
 
 ```python
+from axonfi import Chain
+
 toolkit = AxonToolkit(
     vault_address="0x...",
-    chain_id=84532,
+    chain_id=Chain.BaseSepolia,
     bot_keystore="bot-keystore.json",
     bot_passphrase="your-passphrase",
 )
@@ -95,9 +100,11 @@ toolkit = AxonToolkit(
 ### Custom Relayer URL
 
 ```python
+from axonfi import Chain
+
 toolkit = AxonToolkit(
     vault_address="0x...",
-    chain_id=84532,
+    chain_id=Chain.BaseSepolia,
     bot_private_key="0x...",
     relayer_url="https://relay.axonfi.xyz",
 )
